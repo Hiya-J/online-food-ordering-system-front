@@ -12,7 +12,7 @@ function Navbar() {
             <nav className="navbar-dark d-inline-flex align-items-center flex-grow-1">
       
     <Link to="/" className="navbar-brand">
-      <img id="nav-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz63wSDPr3op8Onl6hy-rEjsprxoYD-uUn9BDBTGYqrkjKIpkcdLT4Zfsnkohaj1neh1k&usqp=CAU" alt="nav-logo" className="img-fluid d-inline-block align-baseline me-2" />
+      <img id="nav-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPDwrdCgGKwEmWgQlqEbS4OwtTZ5-HO90-Dg&usqp=CAU" alt="nav-logo" className="img-fluid d-inline-block align-baseline me-2" />
       <span className="nav-title">Food</span><span className="nav-title-to">Palace</span>
     </Link>
     

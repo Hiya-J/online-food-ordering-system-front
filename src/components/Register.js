@@ -26,12 +26,23 @@ function Register() {
 
         e.preventDefault();
         //api post to server
-        axios.post('http://localhost:3000/register-user',user)
+        axios.post('http://localhost:9000/create-user',user
+        // {
+        //     headers: {
+        //       // 'application/json' is the modern content-type for JSON, but some
+        //       // older servers may use 'text/json'.
+        //       // See: http://bit.ly/text-json
+        //       'content-type': 'text/json'
+        //     }
+        //   }
+          )
         .then(res =>{
             setMsg("Registered Successfully");
+            console.log(res)
            //redirect to login page
         })
         .catch((e)=>{
+            console.log(e)
             setMsg("Something went wrong. Please try again later");
         })
     }

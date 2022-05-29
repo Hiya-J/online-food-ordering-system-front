@@ -8,6 +8,8 @@ function Login() {
     const iL = useContext(itemContext);
     const history=useHistory();
     const loggedin = store.get('loggedIn');
+    // const loggedin = true;
+    // const [loggedIn ,setLogin] = useState(false)
     const {loggedIn}=iL.state ?? (loggedin ?? false);
     const [userLogin, setUserLogin]=useState({mail:"", psd:""}) 
     const orderedItems = store.get('orderedItems');
@@ -17,9 +19,11 @@ function Login() {
     useEffect(()=>{
          //navigate to specific page after login
     if(loggedIn===true){
+        console.log("Logged in is true ")
         if(orderedItems && orderedItems.length){
+            console.log("ordered items ", orderedItems)
         //got to checkout page
-        //flag=true;
+        // flag=true;
         setTimeout(()=>{ history.replace('/checkout')},1000);
     }
     else{
@@ -33,10 +37,12 @@ function Login() {
            flag=true;
         e.preventDefault();
         //api call to fetch users
-        axios.get("http://localhost:3000/get-users")
+        axios.post("http://localhost:9000/login-user",userLogin)
          .then(response =>{
-             flag=false;
-        iL.method( {type:'checkUser', payload: response.data ,user:userLogin});
+            //  setLogin(true)
+            //  flag=false;
+             console.log("My user ",response)
+        iL.method( {type:'checkUser', payload: response.data ,user:userLogin });
       })
     .catch((e)=>{
         flag=false;

@@ -61,7 +61,9 @@ a.hoverMe:hover{
   border-radius: 5px;
 }
 .loggedBar{
-  z-index:2;
+  z-index:10;
+  background-color: rgb(128, 27, 65);
+  border-radius: 5px;
 }
 .spinnerBlock{
   position: absolute;

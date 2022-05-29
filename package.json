@@ -1,8 +1,9 @@
 {
   "name": "online-food-delivery-app",
   "version": "0.1.0",
-  "private": true,
-  "author": "Uma Avula",
+  "private" : true,
+  "proxy": "http://127.0.0.1:9000",
+  "author": "foodieMonk",
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap-icons": "^1.6.1",

@@ -12,7 +12,7 @@ function ItemModal() {
     console.log(dis, "arrr");
     const increment=()=>{
         //if(count>=0){ count++};
-        if(count>=0){ setCount(p=>p+1)} ;
+        if(count>=0){ setCount(p=>p+1)} ;  
         iL.method({type:'addCart',payload:dis})
         if(list.length){
             iL.method({type:'getTotalItems'}) 

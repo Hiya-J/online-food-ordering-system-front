@@ -15,6 +15,7 @@ const initialState={
 }
 const myReducer= (state=initialState, action)=>{
   const {type} =action; 
+  console.log("This is action taken ",action)
   switch(type){
             case 'set_id':
               return {...state, id:action.payload}
@@ -71,35 +72,47 @@ const myReducer= (state=initialState, action)=>{
                     break;
                     case 'checkUser':
                       const pl=action.payload, u=action.user;
-                      if(pl.length){
-                        const user =  pl.filter(p=> (
-                          p.mail === u.mail && p.psd===u.psd ))
-                          if(user.length){
-                            axios.put(`http://localhost:3000/edit-user/:id`,{...user[0],loggedIn:true})
+                      console.log("This is checkUser payload ",pl)
+                      if(pl){
+                        // const user =  pl.filter(p=> (
+                        //   p.mail === u.mail && p.psd===u.psd ))
+                          // if(user.length){
+                            axios.post(`http://localhost:9000/edit-profile/${pl._id}`,{...pl,loggedIn:true})
                             .then(res =>{ 
-                              store.set('user',user[0]);
+                              console.log("Response is ",res.data)
+                              store.set('user',pl);
                               store.set('loggedIn' ,true);
                             } )
                             .catch(e=>alert("Something gone wrong"))
-                            
+                      //       console.log("Here is th payload ",pl)
                         return {...state, loggedIn:true}          
-                          }            
-                        else{ 
-                          alert("Please enter valid credentials");
-                          store.set('loggedIn' ,false);
-                         return {...state, loggedIn:false}
-                      }
+                      //     }            
+                      //   // else{ 
+                      //     alert("Please enter valid credentials");
+                      //     store.set('loggedIn' ,false);
+                      //    return {...state, loggedIn:false}
+                      // }
                     }
                     else{
                       console.log("User data not found");
+                      console.log("Action payload ",action.payload)
                     }
                       break;
                       
                    case 'logOut':
-                    
-                    store.clearAll();
+                    {
+                      let p2 = action.payload
+                      console.log("This is logout payload ",p2)
+                      axios.post(`http://127.0.0.1:9000/logout/${p2._id}`,{...p2,loggedIn:false}).then(res =>{ 
+                        console.log("Response is ",res.data)
+                        store.set('user',p2);
+                        store.set('loggedIn' ,false);
+                      } )
+                      .catch(e=>alert("Something gone wrong"))
+                      store.clearAll();
+
                     return {...initialState, loggedIn:false, list:[],totalItems:0,totalCost:0}
-                    
+                  }
                      //return {...state,}
                        
         default:
@@ -119,7 +132,7 @@ function App() {
                <Route path='/register' render={props => <LoginLayout {...props}/>}/>
                <Route path='/menu' render={props => <DashboardLayout data={myState} {...props}/>}/>
                <Route path='/editProfile' render={props => <DashboardLayout {...props}/>}/>
-               <Route path='/checkout' render={props => <DashboardLayout {...props}/>}/>
+               <Route path='/checkout' render={props => <DashboardLayout {...props} />}/>
                {/* <Route children={props=><Footer {...props}/>}/> */}
                {/* <Route children={props=><Navbar {...props}/>}/> */}
               </Switch>           
